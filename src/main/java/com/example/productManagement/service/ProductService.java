@@ -6,8 +6,11 @@ import com.example.productManagement.tables.Products;
 import com.example.productManagement.dao.ProductDao;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,14 +21,21 @@ public class ProductService {
     @Autowired
     private CategoryDao categoryDao;
     @Transactional
-    public List<Products> getAllProducts() {
-        return productDao.findAll();
+    public ResponseEntity<List<Products>> getAllProducts() {
+        try{
+            return new ResponseEntity<>(productDao.findAll(), HttpStatus.OK);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
     }
-//    public List<Products> getProductsByCategory(Integer categoryid) {
-//        return productDao.findByCategoryId(categoryid);
-//    }
-    public String addProducts(Products products) {
+    public ResponseEntity<String> addProducts(Products products) {
         productDao.save(products);
+        return new ResponseEntity<>("Success",HttpStatus.CREATED);
+    }
+    @Transactional
+    public String deleteProduct(Integer productId) {
+        productDao.deleteById(productId);
         return "Success";
     }
 }

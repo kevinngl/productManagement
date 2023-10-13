@@ -17,5 +17,4 @@ public class Products {
 
     private Integer supplier_id;
     private Integer category_id;
-
 }

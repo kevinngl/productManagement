@@ -15,5 +15,4 @@ public class SupplierService {
     public List<Suppliers> getAllSuppliers() {
         return supplierDao.findAll();
     }
-
 }
