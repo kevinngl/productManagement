@@ -9,10 +9,12 @@ import java.util.List;
 @Entity
 public class Suppliers {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    private String suppliername;
-    private String contactphone;
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer supplier_id;
+    private String supplier_name;
+    private String contact_person;
+    private String phone_number;
+    @OneToMany(targetEntity = Products.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "supplier_id",referencedColumnName = "supplier_id")
     private List<Products> products;
 }

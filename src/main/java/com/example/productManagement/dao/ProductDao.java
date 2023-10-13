@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ProductDao extends JpaRepository<Products, Integer> {
+//        List<Products> findByCategoryId(Integer categoryid);
 }
-//    List<Products> findByCategoryId(Integer categoryid);

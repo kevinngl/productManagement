@@ -9,19 +9,13 @@ import lombok.Data;
 @Entity
 public class Products {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer product_id;
 
-    private String productname;
+    private String product_name;
     private double price;
 
-    @ManyToOne
-    @JoinColumn(name = "categoryid", nullable = false)
-    private Categories category;
+    private Integer supplier_id;
+    private Integer category_id;
 
-    @ManyToOne
-    @JoinColumn(name = "supplierid", nullable = false)
-    private Suppliers supplier;
-
-    private int stockquantity;
 }

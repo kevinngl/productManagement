@@ -9,9 +9,10 @@ import java.util.List;
 @Entity
 public class Categories {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
-    private String categoryname;
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer category_id;
+    private String category_name;
+    @OneToMany(targetEntity = Products.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "category_id",referencedColumnName = "category_id")
     private List<Products> products;
 }
