@@ -22,6 +22,14 @@ public class ProductsController {
     public ResponseEntity<String> addProducts(@RequestBody Products products){
         return productService.addProducts(products);
     }
+    @PutMapping("updateProduct/{productId}")
+    public ResponseEntity<String> updateProduct(@PathVariable Integer productId, @RequestBody Products updatedProduct) {
+        ResponseEntity<String> responseEntity = productService.updateProducts(productId, updatedProduct);
+
+        // Handle the response entity as needed
+        return responseEntity;
+    }
+
     @DeleteMapping("/deleteProduct/{productId}")
     public ResponseEntity<String> deleteProduct(@PathVariable Integer productId) {
         String result = productService.deleteProduct(productId);
