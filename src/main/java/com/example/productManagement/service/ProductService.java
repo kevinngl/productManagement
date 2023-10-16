@@ -1,6 +1,7 @@
 package com.example.productManagement.service;
 
 import com.example.productManagement.dao.CategoryDao;
+import com.example.productManagement.dao.InventoryDao;
 import com.example.productManagement.tables.Categories;
 import com.example.productManagement.tables.Products;
 import com.example.productManagement.dao.ProductDao;
@@ -56,10 +57,22 @@ public class ProductService {
         }
     }
 
+    @Autowired
+    private InventoryDao inventoryDao;
 
     @Transactional
     public String deleteProduct(Integer productId) {
-        productDao.deleteById(productId);
-        return "Success";
+        try {
+            // Delete the corresponding inventory records
+            inventoryDao.deleteById(productId);
+
+            // Delete the product
+            productDao.deleteById(productId);
+
+            return "Success";
+        } catch (Exception e) {
+            // Handle exceptions or log errors
+            return "Error: " + e.getMessage();
+        }
     }
 }

@@ -3,6 +3,8 @@ package com.example.productManagement.tables;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 //This is ORM (Object Relational Model)
 
 @Data
@@ -17,4 +19,7 @@ public class Products {
 
     private Integer supplier_id;
     private Integer category_id;
+    @OneToMany(targetEntity = Inventories.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id",referencedColumnName = "product_id")
+    private List<Inventories> inventories;
 }
